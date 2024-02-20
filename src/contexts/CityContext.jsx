@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 
 const CityContext = createContext();
 
@@ -36,4 +36,11 @@ function CityProvider({ children }) {
   );
 }
 
-export { CityProvider };
+function useCity() {
+  const context = useContext(CityContext);
+  if (context === undefined)
+    throw new Error('CityContext used outside CityProvider scope');
+  return context;
+}
+
+export { CityProvider, useCity };
