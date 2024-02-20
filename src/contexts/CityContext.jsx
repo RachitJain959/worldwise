@@ -1,8 +1,8 @@
 import { createContext, useState, useEffect } from 'react';
 
-const cityContext = createContext();
+const CityContext = createContext();
 
-function CityProvider() {
+function CityProvider({ children }) {
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,4 +23,17 @@ function CityProvider() {
 
     fetchCities();
   }, []);
+
+  return (
+    <CityContext.Provider
+      value={{
+        cities,
+        isLoading,
+      }}
+    >
+      {children}
+    </CityContext.Provider>
+  );
 }
+
+export { CityProvider };
