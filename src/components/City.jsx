@@ -4,6 +4,7 @@ import { useCity } from '../contexts/CityContext';
 import { useEffect } from 'react';
 // import Button from './Button';
 import Spinner from './Spinner';
+import BackButton from './BackButton';
 
 // TEMP DATA
 //   const currentCity = {
@@ -63,6 +64,9 @@ function City() {
         >
           Check out {cityName} on Wikipedia &rarr;
         </a>
+      </div>
+      <div>
+        <BackButton />
       </div>
     </div>
   );
