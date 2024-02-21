@@ -1,11 +1,14 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './Map.module.css';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import { useState } from 'react';
 import { useCity } from '../contexts/CityContext';
 
 function Map() {
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const lat = searchParams.get('lat');
+  const lng = searchParams.get('lng');
 
   const [mapPosition, setMapPosition] = useState([40, 0]);
   const { cities } = useCity();
@@ -17,7 +20,7 @@ function Map() {
       <MapContainer
         className={styles.map}
         center={mapPosition}
-        zoom={13}
+        zoom={6}
         scrollWheelZoom={true}
       >
         <TileLayer
@@ -38,14 +41,17 @@ function Map() {
             </Marker>
           );
         })}
-        {/* <Marker position={mapPosition}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker> */}
+
+        <ChangeCenter position={[lat || 40, lng || 0]} />
       </MapContainer>
     </div>
   );
+}
+
+function ChangeCenter({ position }) {
+  const map = useMap();
+  map.setView(position);
+  return null;
 }
 
 export default Map;
