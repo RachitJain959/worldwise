@@ -33,11 +33,22 @@ function Map() {
     [lat, lng]
   );
 
+  useEffect(
+    function () {
+      if (geolocationPosition) {
+        setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
+      }
+    },
+    [geolocationPosition]
+  );
+
   return (
     <div className={styles.mapContainer}>
-      <Button type="position" onClick={getPosition}>
-        {isLoadingPosition ? 'Loading...' : 'Use my location'}
-      </Button>
+      {!geolocationPosition && (
+        <Button type="position" onClick={getPosition}>
+          {isLoadingPosition ? 'Loading...' : 'Use my location'}
+        </Button>
+      )}
       <MapContainer
         className={styles.map}
         center={mapPosition}
