@@ -6,6 +6,7 @@ import styles from './Form.module.css';
 import Button from './Button';
 import BackButton from './BackButton';
 import Message from './Message';
+import Spinner from './Spinner';
 
 import { useUrlPosition } from '../hooks/useUrlPosition';
 
@@ -31,9 +32,12 @@ function Form() {
 
   useEffect(
     function () {
+      if (!lat && !lng) return;
+
       async function fetchCityData() {
         try {
           setIsLoadingGeocoding(true);
+          setGeocodingError('');
           const res = await fetch(
             `${BASE_URL}?latitude=${lat}&longitude=${lng}`
           );
@@ -57,6 +61,11 @@ function Form() {
     },
     [lat, lng]
   );
+
+  if (!lat && !lng)
+    return <Message message=" Click somewhere on the map to begin 👉" />;
+
+  if (isLoadingGeocoding) return <Spinner />;
 
   if (geocodingError) return <Message message={geocodingError} />;
 
