@@ -35,42 +35,6 @@
         "lng": 13.376933665713324
       },
       "id": "98443197"
-    },
-    {
-      "id": "d35b",
-      "cityName": "Valladolid",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "notes": "test",
-      "date": "2024-02-22T18:19:11.805Z",
-      "position": {
-        "lat": "41.63186741069748",
-        "lng": "-4.729614257812501"
-      }
-    },
-    {
-      "id": "25a3",
-      "cityName": "Bordeaux",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "notes": "test2",
-      "date": "2024-02-22T18:21:41.307Z",
-      "position": {
-        "lat": "44.84808025602074",
-        "lng": "-0.5822753906250001"
-      }
-    },
-    {
-      "id": "9139",
-      "cityName": "Toulouse",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "notes": "test3",
-      "date": "2024-02-22T18:27:34.283Z",
-      "position": {
-        "lat": "43.600284023536325",
-        "lng": "1.4611816406250002"
-      }
     }
   ]
 }

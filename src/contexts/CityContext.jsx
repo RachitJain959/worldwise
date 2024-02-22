@@ -43,14 +43,29 @@ function CityProvider({ children }) {
       setIsLoading(true);
       const res = await fetch(`http://localhost:9000/cities`, {
         method: 'POST',
-        body: JSON.stringify(newCity),
+        body: JSON.stringify(newCity), //converts obj into string
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json', //just so that api knows what type of data it is receiving
         },
       });
       const data = await res.json();
 
       setCities((cities) => [...cities, data]);
+    } catch (err) {
+      throw new Error('Something went wrong...');
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function deleteCity(id) {
+    try {
+      setIsLoading(true);
+      await fetch(`http://localhost:9000/cities/${id}`, {
+        method: 'DELETE',
+      });
+
+      setCities((cities) => cities.filter((city) => city.id !== id));
     } catch (err) {
       throw new Error('Something went wrong...');
     } finally {
@@ -66,6 +81,7 @@ function CityProvider({ children }) {
         currentCity,
         getCity,
         createCity,
+        deleteCity,
       }}
     >
       {children}
