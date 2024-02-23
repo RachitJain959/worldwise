@@ -1,11 +1,38 @@
-import { createContext, useState, useEffect, useContext } from 'react';
+import {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  useReducer,
+} from 'react';
 
 const CityContext = createContext();
 
+const initialState = {
+  cities: [],
+  isLoading: false,
+  currentCity: {},
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'loading':
+      return { ...state, isLoading: true };
+
+    case 'cities/loader':
+      return { ...state, isLoading: false, cities: action.payload };
+
+    default:
+      throw new Error('Unknown action type');
+  }
+}
+
 function CityProvider({ children }) {
-  const [cities, setCities] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentCity, setCurrentCity] = useState({});
+  //   const [cities, setCities] = useState([]);
+  //   const [isLoading, setIsLoading] = useState(false);
+  //   const [currentCity, setCurrentCity] = useState({});
+
+  const { state, dispatch } = useReducer(reducer, initialState);
 
   useEffect(function () {
     async function fetchCities() {
