@@ -8,6 +8,7 @@ import City from './components/City';
 import Form from './components/Form';
 import ProtectedRoute from './pages/ProtectedRoute';
 import { Suspense, lazy } from 'react';
+import SpinnerFullPage from './components/SpinnerFullPage';
 
 // import Product from './pages/Product';
 // import Pricing from './pages/Pricing';
@@ -28,32 +29,33 @@ function App() {
     <AuthProvider>
       <CityProvider>
         <BrowserRouter>
-          {/* <Suspense fallback={<Spinner} */}
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="pricing" element={<Pricing />} />
-            <Route path="product" element={<Product />} />
-            <Route path="login" element={<Login />} />
+          <Suspense fallback={<SpinnerFullPage />}>
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="pricing" element={<Pricing />} />
+              <Route path="product" element={<Product />} />
+              <Route path="login" element={<Login />} />
 
-            <Route
-              path="app"
-              element={
-                <ProtectedRoute>
-                  {' '}
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<Navigate replace to="cities" />} />
+              <Route
+                path="app"
+                element={
+                  <ProtectedRoute>
+                    {' '}
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Navigate replace to="cities" />} />
 
-              <Route path="cities" element={<CityList />} />
-              <Route path="cities/:id" element={<City />} />
-              <Route path="countries" element={<CountryList />} />
-              <Route path="form" element={<Form />} />
-            </Route>
+                <Route path="cities" element={<CityList />} />
+                <Route path="cities/:id" element={<City />} />
+                <Route path="countries" element={<CountryList />} />
+                <Route path="form" element={<Form />} />
+              </Route>
 
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
       </CityProvider>
     </AuthProvider>
