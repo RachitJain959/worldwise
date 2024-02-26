@@ -7,7 +7,7 @@ import CountryList from './components/CountryList';
 import City from './components/City';
 import Form from './components/Form';
 import ProtectedRoute from './pages/ProtectedRoute';
-import { lazy } from 'react';
+import { Suspense, lazy } from 'react';
 
 // import Product from './pages/Product';
 // import Pricing from './pages/Pricing';
@@ -28,6 +28,7 @@ function App() {
     <AuthProvider>
       <CityProvider>
         <BrowserRouter>
+          {/* <Suspense fallback={<Spinner} */}
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="pricing" element={<Pricing />} />
